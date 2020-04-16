@@ -55,6 +55,12 @@
         <Compile Include="Tests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\MontyHallKata\MontyHallKata.csproj">
+        <Project>{2471d2a1-0917-423e-bd36-51908041e62f}</Project>
+        <Name>MontyHallKata</Name>
+      </ProjectReference>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
