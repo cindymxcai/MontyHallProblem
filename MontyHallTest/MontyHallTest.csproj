@@ -51,7 +51,6 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="MontyHall.cs" />
         <Compile Include="Tests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
