@@ -7,61 +7,53 @@ namespace MontyHallTest
 {
     public class MontyHall
     {
-        private readonly Rng _random = new Rng();
-        public List<Choice> SetUpDoors()
-        {
-            List<Choice> choices = new List<Choice>{new Choice(), new Choice(), new Choice()};
-            return choices;
-        }
 
-        public List<Choice> PlacePrize(IRng rng, List<Choice> doors)
+        public void PlacePrize(IRng rng, List<Door> doors) 
         {
             doors[rng.Next(0,3)].IsPrize = true;
-            return doors;
         }
 
-        public bool PlayOneGame(IRng rng, bool isSwitching, List<Choice> doors)
+        public bool PlayOneGame(IRng rng, bool isSwitching, List<Door> doors)
         {
-            var selection = rng.Next(0,3);
+             PlacePrize(rng,doors);
             
-            var choices = PlacePrize(rng,doors);
-            choices[selection].IsSelected = true;
-            var chosenDoor = choices[selection];
-            var displayDoor = rng.Next(0, 2);
-
-            var doorToDisplay = choices.Where(x => !x.IsSelected && !x.IsPrize);
-            var toDisplay = doorToDisplay as Choice[] ?? doorToDisplay.ToArray();
-            var display = toDisplay.ElementAt(toDisplay.Count() == 1 ? 0 : displayDoor);
-            choices.Remove(display);
+            var selection = rng.Next(0,3);
+            doors[selection].IsSelected = true;
+            var chosenDoor = doors[selection];
+            
+            var doorToDisplay = doors.FirstOrDefault(x => !x.IsSelected && !x.IsPrize);
+            doors.Remove(doorToDisplay);
 
             if (isSwitching)
             {
-                var firstChoice = choices.FirstOrDefault(x => x.IsSelected);
-                chosenDoor = choices.FirstOrDefault(x => !x.IsSelected);
-                firstChoice.IsSelected = false;
-                chosenDoor.IsSelected = true;
+                chosenDoor = doors.FirstOrDefault(x => !x.IsSelected);
+           
             }
 
             return chosenDoor.IsPrize;
        
         }
 
-        public int PlayAllGames(IRng rng, bool isSwitching, int games)
+        public (int,int) PlayAllGames(IRng rng, bool isSwitching, int games)
         {
             int wins = 0;
-            for (int i = 0; i < games; i++)
+            int losses = 0; 
+            for (int _ = 0; _ < games; _++) 
             {
-                var doors = SetUpDoors();
+                List<Door> doors = new List<Door>{new Door(), new Door(), new Door()};
                 
                 if (PlayOneGame(rng, isSwitching, doors))
                     wins++;
+                else
+                {
+                    losses++;
+                }
             }
-
-            return wins;
+            return (wins, losses);
         }
     }
 
-    public class Choice
+    public class Door
     {
         public bool IsPrize = false;
         public bool IsSelected = false;
