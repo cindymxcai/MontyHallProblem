@@ -1,9 +1,8 @@
 ﻿using System;
-using MontyHallTest;
 
 namespace MontyHallKata
 {
-    internal class Program
+    internal static class Program
     {
         public static void Main(string[] args)
         {
@@ -16,8 +15,8 @@ namespace MontyHallKata
             Console.ResetColor();
             var rng = new Rng();
             var montyHall = new MontyHall();
-            var switching = montyHall.PlayAllGames(rng, true, 1000);
-            var staying = montyHall.PlayAllGames(rng, false, 1000);
+            var switching = MontyHall.PlayAllGames(rng, true, 1000);
+            var staying = MontyHall.PlayAllGames(rng, false, 1000);
 
             Console.WriteLine("Switching wins: " + switching.Item1 + "\nSwitching losses: " + switching.Item2);
             Console.WriteLine("_________________________________________________");

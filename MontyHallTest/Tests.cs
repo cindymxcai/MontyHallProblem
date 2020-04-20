@@ -24,7 +24,7 @@ namespace MontyHallTest
             var number1 = new TestRng(1);
             List<Door> doors = new List<Door>{new Door(), new Door(), new Door()};
 
-            montyHall.PlacePrize(number1, doors);
+            MontyHall.PlacePrize(number1, doors);
             Assert.Equal(false, doors[0].IsPrize);
             Assert.Equal(true, doors[1].IsPrize);
             Assert.Equal(false, doors[2].IsPrize);
@@ -37,7 +37,7 @@ namespace MontyHallTest
             var number1 = new TestRng(1);
             List<Door> doors = new List<Door>{new Door(), new Door(), new Door()};
 
-            var win =  montyHall.PlayOneGame(number1, false, doors);
+            var win =  MontyHall.PlayOneGame(number1, false, doors);
             Assert.True(win);
         }
 
@@ -46,7 +46,7 @@ namespace MontyHallTest
         {
             var montyHall = new MontyHall();
             var number1 = new TestRng(0);
-            var wins = montyHall.PlayAllGames(number1, false,3);
+            var wins = MontyHall.PlayAllGames(number1, false,3);
             Assert.Equal(3, wins.Item1);
         }
         
