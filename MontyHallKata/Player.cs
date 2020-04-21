@@ -5,7 +5,7 @@ namespace MontyHallKata
 {
     public class Player
     {
-        public Door SelectDoor(IRng rng, List<Door> doors)
+        public Door SelectRandomDoor(IRng rng, List<Door> doors)
         {
             var selection = rng.Next(0,3);
             doors[selection].IsSelected = true;
@@ -15,8 +15,8 @@ namespace MontyHallKata
 
         public Door SwitchDoor(IEnumerable<Door> doors)
         {
-             var chosendoor = doors.FirstOrDefault(x => !x.IsSelected);
-             return chosendoor;
+             var chosenDoor = doors.FirstOrDefault(x => !x.IsSelected);
+             return chosenDoor;
         }
     }
 }

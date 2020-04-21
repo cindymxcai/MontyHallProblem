@@ -5,7 +5,7 @@ namespace MontyHallKata
 {
     public class Host
     {
-        public void DisplayDoor(List<Door> doors)
+        public void DisplayUnselectedNonPrizeDoor(List<Door> doors)
         {
             var doorToDisplay = doors.FirstOrDefault(x => !x.IsSelected && !x.IsPrize);
             doors.Remove(doorToDisplay);

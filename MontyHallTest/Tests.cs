@@ -24,7 +24,7 @@ namespace MontyHallTest
             var number1 = new TestRng(1);
             List<Door> doors = new List<Door>{new Door(), new Door(), new Door()};
 
-            MontyHall.PlacePrize(number1, doors);
+            doors[number1.Next(0,3)].IsPrize = true;
             Assert.Equal(false, doors[0].IsPrize);
             Assert.Equal(true, doors[1].IsPrize);
             Assert.Equal(false, doors[2].IsPrize);

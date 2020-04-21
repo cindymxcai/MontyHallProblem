@@ -15,7 +15,7 @@ namespace MontyHallKata
             Console.ResetColor();
             var rng = new Rng();
             var montyHall = new MontyHall();
-            var switching = MontyHall.PlayAllGames(rng, true, 1000);
+            var switching = MontyHall.PlayAllGames(rng, true, 1000); //make 1000 constant
             var staying = MontyHall.PlayAllGames(rng, false, 1000);
 
             Console.WriteLine("Switching wins: " + switching.Item1 + "\nSwitching losses: " + switching.Item2);
