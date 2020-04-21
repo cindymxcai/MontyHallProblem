@@ -51,10 +51,14 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Door.cs" />
-        <Compile Include="MontyHall.cs" />
         <Compile Include="Tests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\MontyHallProblem\MontyHallProblem.csproj">
+        <Project>{d2a6575e-725e-45b6-8095-a128606af7c7}</Project>
+        <Name>MontyHallProblem</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
