@@ -4,7 +4,7 @@ namespace MontyHallProblem
 {
     public class MontyHall
     {
-        public readonly List<Door> Doors = new List<Door> {new Door(), new Door(), new Door()};
+        public readonly List<Door> Doors = new List<Door> {new Door(), new Door(), new Door()}; //TODO separate doors to a class 
         private readonly Rng _rng = new Rng();
 
         public bool PlayGame(bool willPlayerSwitch)

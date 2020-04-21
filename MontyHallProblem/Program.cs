@@ -36,4 +36,5 @@ namespace MontyHallProblem
         }
         }
     }
+//TODO: take playallgames in simulation class
 
