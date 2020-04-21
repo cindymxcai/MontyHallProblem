@@ -21,6 +21,7 @@
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+        <Prefer32bit>false</Prefer32bit>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,10 +40,12 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Door.cs" />
+        <Compile Include="Host.cs" />
         <Compile Include="IRng.cs" />
+        <Compile Include="MontyHall.cs" />
+        <Compile Include="Player.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Properties\MontyHall.cs" />
         <Compile Include="Rng.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

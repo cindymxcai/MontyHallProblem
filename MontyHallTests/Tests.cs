@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using MontyHallProblem;
 using Xunit;
 
 namespace MontyHallTests
@@ -19,8 +20,33 @@ namespace MontyHallTests
         public void StartingNewGameShouldPlaceAPrizeBehindRandomDoor()
         {
             var montyHall = new MontyHall();
-            montyHall.PlayGame();
-            Assert.True(montyHall.Doors.Any(x => x.IsPrize == true));
+            montyHall.PlayGame(true);
+            Assert.True(montyHall.Doors.Any(x => x.IsPrize));
+        }
+
+        [Fact]
+        public void PlayerShouldSelectRandomDoor()
+        {
+            var montyHall = new MontyHall();
+            montyHall.PlayGame(true);
+            Assert.True(montyHall.Doors.Any(x => x.IsSelected));
+        }
+
+        [Fact]
+        public void HostShouldDisplayRemainingDoorNotContainingPrize()
+        {
+            var montyHall = new MontyHall();
+            var host = new Host();
+            var displayedDoor = host.DisplayRemainingDoorContainingNoPrize(montyHall.Doors);
+            Assert.False(displayedDoor.IsPrize && displayedDoor.IsSelected);
+        }
+
+        [Fact]
+        public void PlayerShouldBeAbleToSwitchSelectedDoor()
+        {
+            var montyHall = new MontyHall();
+            montyHall.PlayGame(true);
+            //assert if switched 
         }
     }
 }
