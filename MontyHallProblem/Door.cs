@@ -1,4 +1,4 @@
-namespace MontyHallTests
+namespace MontyHallProblem
 {
     public class Door
     {

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using MontyHallTests;
 
 namespace MontyHallProblem
 {
