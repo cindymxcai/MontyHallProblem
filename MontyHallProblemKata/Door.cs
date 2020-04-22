@@ -4,9 +4,10 @@ namespace MontyHallProblemKata
 {
     public class Door //TODO find better name 
     {
-        public bool IsPrize = false;
-        public bool IsChosen = false;
-        public bool IsDisplayed = false;
+        public bool IsPrize;
+        public bool IsChosen;
+        public bool IsOpened;
+        
         public List<Door> Doors = new List<Door>();
         public List<Door> SetUpThreeDoors()
         {

@@ -14,7 +14,7 @@ namespace MontyHallKataTests
             var door = new Door();
             var doors = door.SetUpThreeDoors();
             Assert.Equal(expected, doors[doorNumber].IsChosen);
-            Assert.Equal(expected, doors[doorNumber].IsDisplayed);
+            Assert.Equal(expected, doors[doorNumber].IsOpened);
             Assert.Equal(expected, doors[doorNumber].IsPrize);
         }
 
@@ -41,6 +41,76 @@ namespace MontyHallKataTests
             Assert.Equal(false, door.Doors[0].IsChosen);
             Assert.Equal(false, door.Doors[1].IsChosen);
             Assert.Equal(true, door.Doors[2].IsChosen);
+        }
+
+        [Fact]
+        public void HostShouldOpenAnUnSelectedDoorThatIsntPrize()
+        {
+            var door = new Door();
+            var player = new Player();
+            var host = new Host();
+            
+            var doors = door.SetUpThreeDoors();
+            var choice = new TestRng(2);
+            var prize = new TestRng(0);
+            door.PlacePrize(prize, doors);
+            player.ChooseRandomDoor(choice, doors);
+            host.OpenUnselectedDoorThatIsntPrize(doors);
+            
+            Assert.Equal(false, door.Doors[0].IsOpened);
+            Assert.Equal(true, door.Doors[1].IsOpened);
+            Assert.Equal(false, door.Doors[2].IsOpened);
+        }
+
+        [Fact]
+        public void PlayerShouldBeAbleToASwitchDoors()
+        {
+            var door = new Door();
+            var player = new Player();
+            var host = new Host();
+            
+            var doors = door.SetUpThreeDoors();
+            var choice = new TestRng(2);
+            var prize = new TestRng(0);
+            door.PlacePrize(prize, doors);
+            player.ChooseRandomDoor(choice, doors);
+            host.OpenUnselectedDoorThatIsntPrize(doors);
+
+            player.SwitchDoor(doors, true);
+            
+            Assert.Equal(true, door.Doors[0].IsChosen);
+            Assert.Equal(false, door.Doors[1].IsChosen);
+            Assert.Equal(false, door.Doors[2].IsChosen);
+        }
+
+        [Fact]
+        public void PlayGameShouldReturnTrueIfChosenDoorIsPrize()
+        {
+            var montyHall  = new MontyHall();
+            var prize = new TestRng(2);
+            var choice = new TestRng(0);
+            Assert.True(montyHall.PlayGame(prize, choice, true));
+        }
+
+        [Theory]
+        [InlineData(2, 0, 1000)]
+        [InlineData(2, 2, 0)]
+        public void SimulateGamePlayGivenNumberOfTimesRecordsWinsAndLosses(int prizeNumber, int choiceNumber, int expected)
+        {
+            var simulator = new Simulator();
+            var prize = new TestRng(prizeNumber);
+            var choice = new TestRng(choiceNumber);
+            simulator.PlayAllGames(prize, choice, true);
+            Assert.Equal(expected, simulator.PlayAllGames(prize, choice, true).Item1);
+        }
+
+        [Fact]
+        public void SimulatorShouldDetermineIfPlayerSwitches()
+        {
+            var simulator = new Simulator();
+            var prize = new TestRng(2);
+            var choice = new TestRng(0);
+            simulator.PlayAllGames(prize, choice, true);
         }
     }
 
