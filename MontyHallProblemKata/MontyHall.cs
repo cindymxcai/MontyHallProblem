@@ -1,4 +1,6 @@
 
+using System.Linq;
+
 namespace MontyHallProblemKata
 {
    public class MontyHall
@@ -17,7 +19,7 @@ namespace MontyHallProblemKata
          
          player.SwitchDoor(doors, willPlayerSwitch);
 
-         return player.ChosenDoor.IsPrize;
+         return doors.First(x => x.IsChosen).IsPrize;
       }
    }
 }

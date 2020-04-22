@@ -12,7 +12,7 @@ namespace MontyHallProblemKata
             {
                 var montyHall = new MontyHall();
 
-                if (montyHall.PlayGame(prize, choice, willPlayerSwitch))
+                if (montyHall.PlayGame(prize, choice, willPlayerSwitch))//assign to var
                 {
                     wins++;
                 }
