@@ -1,25 +1,34 @@
 
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MontyHallProblemKata
 {
    public class MontyHall
    {
-      public  bool PlayGame(IRng prize, IRng choice, bool willPlayerSwitch)
+      public List<Door> Doors { get; private set; }
+      public  Prize PlayGame(IRng doorToPlaceCar, IRng doorToChoose, bool willPlayerSwitch)
       {
-         var door = new Door();
-         var doors = door.SetUpThreeDoors();
-         door.PlacePrize(prize,doors);
+         SetUpThreeDoors(doorToPlaceCar);
          
          var player = new Player();
-         player.ChooseRandomDoor(choice, doors);
+         player.ChooseRandomDoor(doorToChoose, Doors);
          
          var host = new Host();
-         host.OpenUnselectedDoorThatIsntPrize(doors);
+         host.OpenUnselectedDoorThatIsGoat(Doors);
          
-         player.SwitchDoor(doors, willPlayerSwitch);
+         player.SwitchDoor(Doors, willPlayerSwitch);
 
-         return doors.First(x => x.IsChosen).IsPrize;
+         return Doors.First(x => x.IsChosen).Prize;
       }
+
+      public void SetUpThreeDoors(IRng rng)
+      {
+          Doors = new List<Door> {new Door(), new Door(), new Door()}; 
+          var door = rng.Next(0, 3);
+          Doors[door].Prize = Prize.Car;
+      }
+
+      
    }
 }

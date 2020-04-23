@@ -11,13 +11,13 @@ namespace MontyHallProblemKata
             doors[choice].IsChosen = true;
         }
 
-        public void SwitchDoor(IEnumerable<Door> doors, bool willPlayerSwitch)
+        public void SwitchDoor(List<Door> doors, bool willPlayerSwitch)
         {
             if (!willPlayerSwitch) return;
             var doorToSwitchTo = doors.FirstOrDefault(x => !x.IsOpened && !x.IsChosen);
             var chosenDoor = doors.FirstOrDefault(x => x.IsChosen);
-            chosenDoor.IsChosen = false;
-            doorToSwitchTo.IsChosen =  true;
+            if (chosenDoor != null) chosenDoor.IsChosen = false;
+            if (doorToSwitchTo != null) doorToSwitchTo.IsChosen = true;
         }
     }
 }
