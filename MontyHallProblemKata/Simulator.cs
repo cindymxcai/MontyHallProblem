@@ -4,11 +4,11 @@ namespace MontyHallProblemKata
     {
         private const int NumberOfGames = 1000;
         private const double PercentageToSwitch = 0.5;
+
         public (int, int) PlayAllGames(IRng doorToPlaceCar, IRng doorToChoose, bool willPlayerSwitch)
         {
             var wins = 0;
             var losses = 0;
-            
             for (var _ = 0; _ < NumberOfGames; _++)
             {
                 var montyHall = new MontyHall();
@@ -26,17 +26,15 @@ namespace MontyHallProblemKata
             return (wins, losses);
         }
 
-        public (int, int, int, int) PlayAllGames(IRng doorToPlaceCar, IRng doorToChoose)
+        public (int, int) PlayAllGames(IRng doorToPlaceCar, IRng doorToChoose, IRng willPlayerSwitch)
         {
             var switchWins = 0;
             var switchLosses = 0;
-            var stayWins = 0;
-            var stayLosses = 0;
-
-           
-                var montyHall = new MontyHall();
-
-                for (var __ = 0; __ < NumberOfGames*PercentageToSwitch; __++)
+            var percentageSwitches = willPlayerSwitch.Next(0, 1);
+            var montyHall = new MontyHall();
+            for (var __ = 0; __ < NumberOfGames; __++)
+            {
+                if (percentageSwitches == 0)
                 {
                     var switchPrize = montyHall.PlayGame(doorToPlaceCar, doorToChoose, true);
                     if (switchPrize == Prize.Car)
@@ -48,24 +46,24 @@ namespace MontyHallProblemKata
                         switchLosses++;
                     }
                 }
-
-                for (var _ = 0; _ < NumberOfGames - NumberOfGames*PercentageToSwitch; _++)
+                else
                 {
-                    var stayPrize = montyHall.PlayGame(doorToPlaceCar, doorToChoose, false);
-                    if (stayPrize == Prize.Car)
+                    var switchPrize = montyHall.PlayGame(doorToPlaceCar, doorToChoose, false);
+                    if (switchPrize == Prize.Car)
                     {
-                        stayWins++;
+                        switchWins++;
                     }
                     else
                     {
-                        stayLosses++;
+                        switchLosses++;
                     }
-
                 }
-               
+            }
 
-            return (switchWins, switchLosses, stayWins, stayLosses);
+            return (switchWins, switchLosses);
         }
-        
+
+        //new method getGameScore
+        //which above will call?
     }
 }

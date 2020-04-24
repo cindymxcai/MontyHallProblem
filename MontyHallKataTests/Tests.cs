@@ -100,36 +100,32 @@ namespace MontyHallKataTests
         }
 
         [Theory]
-        [InlineData(2, 0, 500, 0, 0 ,500)]
-        [InlineData(2, 2, 0, 500, 500 ,0)]
+        [InlineData(2, 0)]
 
-        public void SimulatorShouldPlayGameWherePlayerSwitchesGivenPercentageOfGames(int prizeDoor, int chosenDoor, int switchingWins, int switchingLosses, int stayingWins, int stayingLosses)
+        public void SimulatorShouldPlayGameWherePlayerSwitchesRandomly(int prizeDoor, int chosenDoor)
         {
             var simulator = new Simulator();
             var prize = new TestRng(prizeDoor);
             var choice = new TestRng(chosenDoor);
-            var montyHall = new MontyHall();
-            montyHall.PlayGame(prize, choice, true);
-            Assert.Equal(switchingWins, simulator.PlayAllGames(prize, choice).Item1) ;
-            Assert.Equal(switchingLosses, simulator.PlayAllGames(prize, choice).Item2) ;
-            Assert.Equal(stayingWins, simulator.PlayAllGames(prize, choice).Item3) ;
-            Assert.Equal(stayingLosses, simulator.PlayAllGames(prize, choice).Item4) ;
-
+            var switches = new TestRng(0);
+            var stays = new TestRng(1);
+            Assert.Equal(1000 ,simulator.PlayAllGames(prize,choice, switches).Item1);
+            Assert.Equal(0, simulator.PlayAllGames(prize, choice, stays).Item1);
         }
     }
 
     public class TestRng : IRng
     {
-        private readonly int _doorNumberToReturn;
+        private readonly int _numberToReturn;
 
-        public TestRng(int doorNumberToReturn)
+        public TestRng(int numberToReturn)
         {
-            _doorNumberToReturn = doorNumberToReturn;
+            _numberToReturn = numberToReturn;
         }
 
         public int Next(int minValue, int maxValue)
         {
-            return _doorNumberToReturn;
+            return _numberToReturn;
         }
     }
 }
