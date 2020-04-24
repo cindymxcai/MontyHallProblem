@@ -12,12 +12,12 @@ namespace MontyHallProblemKata
          SetUpThreeDoors(doorToPlaceCar);
          
          var player = new Player();
-         player.ChooseRandomDoor(doorToChoose, Doors);
+         Player.ChooseRandomDoor(doorToChoose, Doors);
          
          var host = new Host();
          host.OpenUnselectedDoorThatIsGoat(Doors);
          
-         player.SwitchDoor(Doors, willPlayerSwitch);
+         Player.SwitchDoor(Doors, willPlayerSwitch);
 
          return Doors.First(x => x.IsChosen).Prize;
       }
