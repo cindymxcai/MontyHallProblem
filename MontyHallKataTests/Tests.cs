@@ -78,11 +78,10 @@ namespace MontyHallKataTests
         public void SimulateGamePlayGivenNumberOfTimesRecordsWinsAndLosses(int prizeNumber, int choiceNumber,
             int expected)
         {
-            var simulator = new Simulator();
             var prize = new TestRng(prizeNumber);
             var choice = new TestRng(choiceNumber);
-            simulator.PlayAllGames(prize, choice, true);
-            Assert.Equal(expected, simulator.PlayAllGames(prize, choice, true).Item1);
+            Simulator.PlayAllGames(prize, choice, true);
+            Assert.Equal(expected, Simulator.PlayAllGames(prize, choice, true).Item1);
         }
 
         [Theory]
@@ -90,10 +89,9 @@ namespace MontyHallKataTests
         [InlineData(true, false)]
         public void SimulatorShouldDetermineIfPlayerSwitches(bool expected, bool willPlayerSwitch)
         {
-            var simulator = new Simulator();
             var prize = new TestRng(2);
             var choice = new TestRng(0);
-            simulator.PlayAllGames(prize, choice, willPlayerSwitch);
+            Simulator.PlayAllGames(prize, choice, willPlayerSwitch);
             var montyHall = new MontyHall();
             montyHall.PlayGame(prize, choice, willPlayerSwitch);
             Assert.Equal(expected, montyHall.Doors[0].IsChosen);
@@ -104,13 +102,12 @@ namespace MontyHallKataTests
 
         public void SimulatorShouldPlayGameWherePlayerSwitchesRandomly(int prizeDoor, int chosenDoor)
         {
-            var simulator = new Simulator();
             var prize = new TestRng(prizeDoor);
             var choice = new TestRng(chosenDoor);
             var switches = new TestRng(0);
             var stays = new TestRng(1);
-            Assert.Equal(1000 ,simulator.PlayAllGames(prize,choice, switches).Item1);
-            Assert.Equal(0, simulator.PlayAllGames(prize, choice, stays).Item1);
+            Assert.Equal(1000 ,Simulator.PlayAllGames(prize,choice, switches).Item1);
+            Assert.Equal(0, Simulator.PlayAllGames(prize, choice, stays).Item1);
         }
     }
 

@@ -6,18 +6,15 @@ namespace MontyHallProblemKata
     {
         public static void Main(string[] args)
         {
-            var simulator = new Simulator();
             IRng rng = new Rng();
-            
-
             
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Welcome to Monty Hall!\n");
             Console.ResetColor();
-            var (switchingWins, switchingLosses) = simulator.PlayAllGames(rng, rng, true);
-            var (stayingWins, stayingLosses) = simulator.PlayAllGames(rng, rng, false);
-            var (bothWins, bothLosses) = simulator.PlayAllGames(rng, rng, rng);
+            var (switchingWins, switchingLosses) = Simulator.PlayAllGames(rng, rng, true);
+            var (stayingWins, stayingLosses) = Simulator.PlayAllGames(rng, rng, false);
+            var (bothWins, bothLosses) = Simulator.PlayAllGames(rng, rng, rng);
 
             
             Console.WriteLine($"Switching \nWins: {switchingWins} \nLosses {switchingLosses}" );
