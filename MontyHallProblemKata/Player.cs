@@ -3,15 +3,17 @@ using System.Linq;
 
 namespace MontyHallProblemKata
 {
-    public class Player
+    public  class Player
     {
-        public static void ChooseRandomDoor(IRng rng, List<Door> doors)
+        public int SwitchingTimes { get; set;}
+
+        public void ChooseRandomDoor(IRng rng, List<Door> doors)
         {
             var choice = rng.Next(0, 3);
             doors[choice].IsChosen = true;
         }
 
-        public static void SwitchDoor(List<Door> doors, bool willPlayerSwitch)
+        public void SwitchDoor(List<Door> doors, bool willPlayerSwitch)
         {
             if (!willPlayerSwitch) return;
             var doorToSwitchTo = doors.FirstOrDefault(x => !x.IsOpened && !x.IsChosen);
