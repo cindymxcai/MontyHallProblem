@@ -13,10 +13,10 @@ namespace MontyHallProblemKata
             Console.WriteLine("Welcome to Monty Hall!\n");
             Console.ResetColor();
             var simulator = new Simulator();
-            var (switchingWins, switchingLosses) = simulator.PlayAllGames(rng, rng, true);
-            var (stayingWins, stayingLosses) = simulator.PlayAllGames(rng, rng, false);
-            var (bothWins, bothLosses) = simulator.PlayAllGames(rng, rng, rng);
 
+            var (switchingWins, switchingLosses) = simulator.PlayAllGames(rng, rng, 1 );
+            var (stayingWins, stayingLosses) = simulator.PlayAllGames(rng, rng, 0  );
+            var (bothWins, bothLosses) = simulator.PlayAllGames(rng, rng, rng.Next(0,1));
             
             Console.WriteLine($"Switching \nWins: {switchingWins} \nLosses {switchingLosses}" );
             Console.WriteLine("_________________________________________________");

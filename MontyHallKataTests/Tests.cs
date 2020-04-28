@@ -23,7 +23,7 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player(false);
+            var player = new Player(1);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             Assert.Equal(false, montyHall.Doors[0].IsChosen);
             Assert.Equal(false, montyHall.Doors[1].IsChosen);
@@ -38,7 +38,7 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player(false);
+            var player = new Player(1);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             host.OpenUnselectedDoorThatIsGoat(montyHall.Doors);
             Assert.Equal(true, montyHall.Doors[0].IsOpened);
@@ -54,10 +54,10 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player(true);
+            var player = new Player(1);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             host.OpenUnselectedDoorThatIsGoat(montyHall.Doors);
-            player.SwitchDoor(montyHall.Doors, true);
+            player.SwitchDoor(montyHall.Doors, player.SwitchingChances);
             Assert.Equal(false, montyHall.Doors[0].IsChosen);
             Assert.Equal(true, montyHall.Doors[1].IsChosen);
             Assert.Equal(false, montyHall.Doors[2].IsChosen);
@@ -69,7 +69,7 @@ namespace MontyHallKataTests
             var montyHall = new MontyHall();
             var car = new TestRng(2);
             var choice = new TestRng(0);
-            Assert.Equal(Prize.Car, montyHall.PlayGame(car, choice, true));
+            Assert.Equal(Prize.Car, montyHall.PlayGame(car, choice, 1));
         }
 
         [Theory]
@@ -81,14 +81,14 @@ namespace MontyHallKataTests
             var prize = new TestRng(prizeNumber);
             var choice = new TestRng(choiceNumber);
             var simulator = new Simulator();
-            simulator.PlayAllGames(prize, choice, true);
-            Assert.Equal(expected, simulator.PlayAllGames(prize, choice, true).Item1);
+            simulator.PlayAllGames(prize, choice, 1);
+            Assert.Equal(expected, simulator.PlayAllGames(prize, choice, 1).Item1);
         }
 
         [Theory]
         [InlineData(false, true)]
         [InlineData(true, false)]
-        public void SimulatorShouldDetermineIfPlayerSwitches(bool expected, bool willPlayerSwitch)
+        public void SimulatorShouldDetermineIfPlayerSwitches(bool expected, int willPlayerSwitch)
         {
             var prize = new TestRng(2);
             var choice = new TestRng(0);
@@ -106,11 +106,9 @@ namespace MontyHallKataTests
         {
             var prize = new TestRng(prizeDoor);
             var choice = new TestRng(chosenDoor);
-            var switches = new TestRng(0);
-            var stays = new TestRng(1);
             var simulator = new Simulator();
-            Assert.Equal(1000 ,simulator.PlayAllGames(prize,choice, switches).Item1);
-            Assert.Equal(0, simulator.PlayAllGames(prize, choice, stays).Item1);
+            Assert.Equal(1000 ,simulator.PlayAllGames(prize,choice, 1).Item1);
+            Assert.Equal(0, simulator.PlayAllGames(prize, choice, 0).Item1);
         }
     }
 

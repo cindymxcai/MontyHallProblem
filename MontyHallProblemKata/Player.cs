@@ -5,16 +5,11 @@ namespace MontyHallProblemKata
 {
     public  class Player
     {
-        public bool IsSwitching { get; }
         public int SwitchingChances { get; }
-
-        public Player(bool isSwitching)
+        
+        public Player(int isSwitching)
         { 
-            IsSwitching = isSwitching;
-        }
-        public Player(IRng isSwitching)
-        { 
-            SwitchingChances = isSwitching.Next(0,1);
+            SwitchingChances = isSwitching;
         }
         
         public void ChooseRandomDoor(IRng rng, List<Door> doors)
@@ -23,9 +18,9 @@ namespace MontyHallProblemKata
             doors[choice].IsChosen = true;
         }
 
-        public void SwitchDoor(List<Door> doors, bool willPlayerSwitch)
+        public void SwitchDoor(List<Door> doors, int willPlayerSwitch)
         {
-            if (!willPlayerSwitch) return;
+            if (willPlayerSwitch == 0) return;
             var doorToSwitchTo = doors.FirstOrDefault(x => !x.IsOpened && !x.IsChosen);
             var chosenDoor = doors.FirstOrDefault(x => x.IsChosen);
             if (chosenDoor != null) chosenDoor.IsChosen = false;

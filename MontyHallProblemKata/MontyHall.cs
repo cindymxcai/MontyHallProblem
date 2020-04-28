@@ -7,7 +7,7 @@ namespace MontyHallProblemKata
    public class MontyHall
    {
       public List<Door> Doors { get; private set; }
-      public  Prize PlayGame(IRng doorToPlaceCar, IRng doorToChoose, bool willPlayerSwitch)
+      public  Prize PlayGame(IRng doorToPlaceCar, IRng doorToChoose, int willPlayerSwitch)
       {
          SetUpThreeDoors(doorToPlaceCar);
          
@@ -17,7 +17,7 @@ namespace MontyHallProblemKata
          var host = new Host();
          host.OpenUnselectedDoorThatIsGoat(Doors);
          
-         player.SwitchDoor(Doors, willPlayerSwitch);
+         player.SwitchDoor(Doors, player.SwitchingChances);
 
          return Doors.First(x => x.IsChosen).Prize;
       }
