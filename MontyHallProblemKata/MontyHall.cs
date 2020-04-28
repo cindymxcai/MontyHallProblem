@@ -7,7 +7,7 @@ namespace MontyHallProblemKata
    public class MontyHall
    {
       public List<Door> Doors { get; private set; }
-      public  Prize PlayGame(IRng doorToPlaceCar, IRng doorToChoose, int willPlayerSwitch)
+      public  Prize PlayGame(IRng doorToPlaceCar, IRng doorToChoose, double willPlayerSwitch)
       {
          SetUpThreeDoors(doorToPlaceCar);
          
