@@ -23,7 +23,7 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player();
+            var player = new Player(false);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             Assert.Equal(false, montyHall.Doors[0].IsChosen);
             Assert.Equal(false, montyHall.Doors[1].IsChosen);
@@ -38,7 +38,7 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player();
+            var player = new Player(false);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             host.OpenUnselectedDoorThatIsGoat(montyHall.Doors);
             Assert.Equal(true, montyHall.Doors[0].IsOpened);
@@ -54,7 +54,7 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player();
+            var player = new Player(true);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             host.OpenUnselectedDoorThatIsGoat(montyHall.Doors);
             player.SwitchDoor(montyHall.Doors, true);

@@ -10,7 +10,8 @@ namespace MontyHallProblemKata
         {
             Wins = 0;
             Losses = 0;
-            PlayGameAndGetScore(doorToPlaceCar, doorToChoose, willPlayerSwitch);
+            var player = new Player(willPlayerSwitch);
+            PlayGameAndGetScore(doorToPlaceCar, doorToChoose, player.IsSwitching);
             return (Wins, Losses);
         }
 
@@ -18,10 +19,8 @@ namespace MontyHallProblemKata
         {
             Wins = 0;
             Losses = 0;
-            var player = new Player();
-            var percentageSwitches = willPlayerSwitch.Next(0, 1);
-            player.SwitchingTimes = percentageSwitches;
-            PlayGameAndGetScore(doorToPlaceCar, doorToChoose, player.SwitchingTimes == 0);
+            var player = new Player(willPlayerSwitch);
+            PlayGameAndGetScore(doorToPlaceCar, doorToChoose, player.SwitchingChances == 0);
             return (Wins, Losses);
         }
 

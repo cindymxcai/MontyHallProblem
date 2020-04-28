@@ -5,8 +5,18 @@ namespace MontyHallProblemKata
 {
     public  class Player
     {
-        public int SwitchingTimes { get; set;}
+        public bool IsSwitching { get; }
+        public int SwitchingChances { get; }
 
+        public Player(bool isSwitching)
+        { 
+            IsSwitching = isSwitching;
+        }
+        public Player(IRng isSwitching)
+        { 
+            SwitchingChances = isSwitching.Next(0,1);
+        }
+        
         public void ChooseRandomDoor(IRng rng, List<Door> doors)
         {
             var choice = rng.Next(0, 3);

@@ -11,7 +11,7 @@ namespace MontyHallProblemKata
       {
          SetUpThreeDoors(doorToPlaceCar);
          
-         var player = new Player();
+         var player = new Player(willPlayerSwitch);
          player.ChooseRandomDoor(doorToChoose, Doors);
          
          var host = new Host();
