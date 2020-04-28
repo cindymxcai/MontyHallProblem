@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,17 +8,15 @@ namespace MontyHallProblemKata
    public class MontyHall
    {
       public List<Door> Doors { get; private set; }
-      public  Prize PlayGame(IRng doorToPlaceCar, IRng doorToChoose, double willPlayerSwitch)
+      public  Prize PlayGame(IRng doorToPlaceCar, Player player)
       {
          SetUpThreeDoors(doorToPlaceCar);
          
-         var player = new Player(willPlayerSwitch);
-         player.ChooseRandomDoor(doorToChoose, Doors);
-         
+         player.ChooseRandomDoor (player.DoorToChoose, Doors);
          var host = new Host();
          host.OpenUnselectedDoorThatIsGoat(Doors);
          
-         player.SwitchDoor(Doors, player.SwitchingChances);
+         player.SwitchDoor(Doors); 
 
          return Doors.First(x => x.IsChosen).Prize;
       }
@@ -25,8 +24,7 @@ namespace MontyHallProblemKata
       public void SetUpThreeDoors(IRng rng)
       {
           Doors = new List<Door> {new Door(), new Door(), new Door()}; 
-          var door = rng.Next(0, 3);
-          Doors[door].Prize = Prize.Car;
+          Doors[rng.Next(0,3)].Prize = Prize.Car;
       }
 
       

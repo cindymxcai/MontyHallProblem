@@ -6,21 +6,21 @@ namespace MontyHallProblemKata
         private int Wins { get; set; }
         private int Losses { get; set; }
         
-        public (int, int) PlayAllGames(IRng doorToPlaceCar, IRng doorToChoose, double willPlayerSwitch)
+        public (int, int) PlayAllGames(IRng doorToPlaceCar, IRng doorToChoose, double switchingChance)
         {
             Wins = 0;
             Losses = 0;
-            PlayGameAndGetScore(doorToPlaceCar, doorToChoose, willPlayerSwitch);
+            PlayGameAndGetScore(doorToPlaceCar, doorToChoose, switchingChance);
             return (Wins, Losses);
         }
 
-        private void PlayGameAndGetScore(IRng doorToPlaceCar, IRng doorToChoose, double willPlayerSwitch)
+        private void PlayGameAndGetScore(IRng doorToPlaceCar, IRng doorToChoose,  double switchingChance)
         {
             for (var _ = 0; _ < NumberOfGames; _++)
             {
-
                 var montyHall = new MontyHall();
-                var prize = montyHall.PlayGame(doorToPlaceCar, doorToChoose, willPlayerSwitch);
+                var player = new Player(doorToChoose, switchingChance);
+                var prize = montyHall.PlayGame(doorToPlaceCar, player);
                 if (prize == Prize.Car)
                 {
                     Wins++;

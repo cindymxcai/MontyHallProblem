@@ -23,7 +23,7 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player(1);
+            var player = new Player(choice, 0);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             Assert.Equal(false, montyHall.Doors[0].IsChosen);
             Assert.Equal(false, montyHall.Doors[1].IsChosen);
@@ -38,7 +38,7 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player(1);
+            var player = new Player(choice, 0);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             host.OpenUnselectedDoorThatIsGoat(montyHall.Doors);
             Assert.Equal(true, montyHall.Doors[0].IsOpened);
@@ -54,10 +54,10 @@ namespace MontyHallKataTests
             var doorNumber = new TestRng(1);
             montyHall.SetUpThreeDoors(doorNumber);
             var choice = new TestRng(2);
-            var player = new Player(1);
+            var player = new Player(choice, 1);
             player.ChooseRandomDoor(choice, montyHall.Doors);
             host.OpenUnselectedDoorThatIsGoat(montyHall.Doors);
-            player.SwitchDoor(montyHall.Doors, player.SwitchingChances);
+            player.SwitchDoor(montyHall.Doors);
             Assert.Equal(false, montyHall.Doors[0].IsChosen);
             Assert.Equal(true, montyHall.Doors[1].IsChosen);
             Assert.Equal(false, montyHall.Doors[2].IsChosen);
@@ -69,7 +69,8 @@ namespace MontyHallKataTests
             var montyHall = new MontyHall();
             var car = new TestRng(2);
             var choice = new TestRng(0);
-            Assert.Equal(Prize.Car, montyHall.PlayGame(car, choice, 1));
+            var player = new Player(choice, 1);
+                Assert.Equal(Prize.Car, montyHall.PlayGame(car, player));
         }
 
         [Theory]
@@ -88,14 +89,15 @@ namespace MontyHallKataTests
         [Theory]
         [InlineData(false, true)]
         [InlineData(true, false)]
-        public void SimulatorShouldDetermineIfPlayerSwitches(bool expected, int willPlayerSwitch)
+        public void SimulatorShouldDetermineIfPlayerSwitches(bool expected, int switchingChance)
         {
             var prize = new TestRng(2);
             var choice = new TestRng(0);
             var simulator = new Simulator();
-            simulator.PlayAllGames(prize, choice, willPlayerSwitch);
+            simulator.PlayAllGames(prize, choice, switchingChance);
             var montyHall = new MontyHall();
-            montyHall.PlayGame(prize, choice, willPlayerSwitch);
+            var player = new Player(choice, switchingChance);
+            montyHall.PlayGame(prize, player);
             Assert.Equal(expected, montyHall.Doors[0].IsChosen);
         }
 

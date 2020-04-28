@@ -14,9 +14,9 @@ namespace MontyHallProblemKata
             Console.ResetColor();
             var simulator = new Simulator();
 
-            var (switchingWins, switchingLosses) = simulator.PlayAllGames(rng, rng, 1 );
-            var (stayingWins, stayingLosses) = simulator.PlayAllGames(rng, rng, 0  );
-            var (bothWins, bothLosses) = simulator.PlayAllGames(rng, rng, 0.5);
+            var (switchingWins, switchingLosses) = simulator.PlayAllGames(rng, rng,1 );
+            var (stayingWins, stayingLosses) = simulator.PlayAllGames(rng,  rng,0  );
+            var (bothWins, bothLosses) = simulator.PlayAllGames(rng,rng,  0.5);
             
             Console.WriteLine($"Switching \nWins: {switchingWins} \nLosses {switchingLosses}" );
             Console.WriteLine("_________________________________________________");
